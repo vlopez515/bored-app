@@ -1,18 +1,22 @@
 import { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Stories from "./Stories"
+import Confetti from 'react-confetti'
+// import useWindowSize from 'react-use/lib/useWindowSize'
 
 function ActivityDetails() {
+  const [activity, setActivity] = useState([]);
   const [favorite, setFavorite] = useState({
     name: "",
     type: "",
     participants: 0,
     price: 0,
-    accessibility: false,
+    accessibility: "",
     is_favorite: false,
   });
-  
+  const [confetti, setConfetti] = useState(false)
+
+
   let { key } = useParams();
   const navigate = useNavigate();
   const API = process.env.REACT_APP_API_URL;
@@ -21,50 +25,53 @@ function ActivityDetails() {
   useEffect(() => {
     axios
       .get(`${API}?key=${key}`)
-      .then((response) => setFavorite(response.data))
+      .then((response) => setActivity(response.data))
       .catch((error) => navigate(`/404`));
   }, [key]);
 
-  const newActivity = (newActivity) => {
+  const addActivity = (newActivity) => {
     axios
-      .post(`${backendAPI}/activities`, newActivity)
-      .then(() => console.log('success'))
-      .catch((err) => console.log(err));
+      // .post(`${backendAPI}/activities`, newActivity)
+      .post('http://localhost:3003/activities/', newActivity)
+      .then(
+        () => { console.log("success")
+        },
+        (error) => console.error(error)
+      )
+      .catch((c) => console.warn("catch", c));
   };
 
+  useEffect(() => {
+    setFavorite({
+      name: activity.activity,
+      type: activity.type,
+      participants: activity.participants,
+      price: activity.price,
+      accessibility: activity.accessibility,
+      is_favorite: true,
+    });
+  }, [activity]);
 
-  // useEffect(() => {
-  //   setFavorite({
-  //     name: activity.activity,
-  //     type: activity.type,
-  //     participants: activity.participants,
-  //     price: activity.price,
-  //     accessibility: activity.accessibility,
-  //     is_favorite: true,
-  //   });
-  // }, [activity]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    newActivity(favorite);
-    alert("Added to Favorites")
-    console.log(favorite);
+  const onClick = () => {
+    addActivity(favorite);
+    setConfetti(true)
   };
+
+ 
 
   return (
     <div className="Activity">
-      <h2>{favorite.activity}</h2>
-      <h2>{favorite.type}</h2>
+      {confetti ? <Confetti /> : null}
+      <h2>{activity.activity}</h2>
+      <h4>Accessibility: {activity.accessibility} </h4>
+      <h4>Type: {activity.type}</h4>
+      <h4>Participants: {activity.participants}</h4>
+      <h4>Price: {activity.price} </h4>
       <div>
-        <Link to={`/activity/${key}/edit`}>
-          <button>Edit</button>
-        </Link>
+        <button onClick={onClick}>Add To Favorites</button>
       </div>
-      <div>
-        <button onClick={handleSubmit}>Add To Favorites</button>
-       </div>
-       <Stories />
-       </div>
+      <div></div>
+    </div>
   );
 }
 

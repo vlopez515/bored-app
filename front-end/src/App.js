@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Edit from "./Pages/Edit";
 import Home from "./Pages/Home";
 import Index from "./Pages/Index";
-import New from "./Pages/New";
 import Show from "./Pages/Show";
+import FavShow from "./Pages/FavShow";
 
 // COMPONENTS
 import NavBar from "./Components/NavBar";
@@ -22,9 +22,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/activities" element={<Index />} />
-            <Route path="/activity/new" element={<New />} />
             <Route exact path="/activity/:key" element={<Show />} />
-            <Route path="/activity/:key/edit" element={<Edit />} />
+            <Route exact path="/activity/fav/:id" element={<FavShow />}/>
+            <Route path="/activity/:id/edit" element={<Edit />} />
           </Routes>
         </main>
       </Router>

@@ -29,13 +29,21 @@ activities.get("/:id", async (req, res) => {
 });
 
 activities.post("/", async (req, res) => {
-    try {
-        const activity = await createActivity(req);
-        res.json(activity)
-      } catch (error) {
-        return error;
-      }
-});
+  if(req.body) { 
+     const createdActivity = await createActivity(req.body)
+      res.status(200).send(createdActivity);
+    } else{
+      res.status(404).send('Error');
+    };
+  });
+
+//     try {
+//         const activity = await createActivity(req);
+//         res.json(activity)
+//       } catch (error) {
+//         return error;
+//       }
+// });
 
 activities.delete("/:id", async (req, res) => {
   const { id } = req.params;
@@ -53,7 +61,7 @@ activities.put("/:id", async (req, res) => {
   if (updatedActivity.id) {
     res.status(200).json(updatedActivity);
   } else {
-    res.status(404).json({error: "Activity not updated for some reason...."});
+    res.status(404).json({error: "Activity NOT updated"});
   }
 })
 

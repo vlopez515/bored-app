@@ -5,7 +5,7 @@ function NavBar() {
   return (
     <StyledNavBar>
       <Link to="/">
-        <h1 className="app-logo"> LINK TO HOMEPAGE</h1>
+        <h1 className="app-logo">THE BORED APP</h1>
       </Link>{" "}
       <Link to="/activities">
         <button>Favorite Activities</button>

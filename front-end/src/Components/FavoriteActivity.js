@@ -1,31 +1,17 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 function FavoriteActivity({ activity, id }) {
-let backendAPI = process.env.REACT_APP_BACKEND_URL;
-let navigate = useNavigate();
 
-
-  const deleteActivity = () => {
-    axios
-      .delete(`${backendAPI}/activities/${id}`)
-      .then(() => {
-        navigate(`/activities`);
-      })
-      .catch((c) => console.error("catch", c));
-  };
-
-  const handleDelete = () => {
-    deleteActivity();
-  };
-
-  return (
+return (
     <div className="Activity">
       <td>
-        <Link to={`/activity/${id}`}><h2>{activity.name}</h2></Link>
+      <Link to={`/activity/fav/${id}`}>
+      <h2>{activity.name}</h2>
+      </Link>
+        <Link to={`/activity/${id}/edit`}><button>Edit</button></Link>
+        
       </td>
-      <button onClick={handleDelete}>Remove From Favorites</button>
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import React from 'react'
-import ActivityEditForm from '../Components/ActivityEditForm'
+import FavActivityEditForm from '../Components/FavActivityEditForm'
 
 function Edit() {
   return (
-    <div><ActivityEditForm /> </div>
+    <div><FavActivityEditForm /> </div>
   )
 }
 
