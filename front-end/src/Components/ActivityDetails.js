@@ -23,7 +23,7 @@ function ActivityDetails() {
     axios
       .get(`${API}?key=${key}`)
       .then((response) => setActivity(response.data))
-      .catch((error) => navigate(`/404`));
+      .catch((e) => navigate(`/404`));
   }, [key]);
 
   const addActivity = (newActivity) => {
