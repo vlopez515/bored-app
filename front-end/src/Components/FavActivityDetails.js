@@ -15,7 +15,7 @@ function FavActivityDetails() {
           .get(`${backendAPI}/activities/${id}`)
           .then((response) => setActivity(response.data))
           .catch((error) => navigate(`/404`));
-      }, [id]);
+      }, [id, backendAPI, navigate]);
  
       const deleteActivity = () => {
         axios

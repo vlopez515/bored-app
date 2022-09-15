@@ -13,7 +13,7 @@ useEffect(() => {
           .get(`${backendAPI}/activities`)
           .then((response) => setActivities(response.data))
           .catch((error) => navigate(`/404`));
-      }, [backendAPI]);
+      }, [backendAPI, navigate]);
 
 
 return (

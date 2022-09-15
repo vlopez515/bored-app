@@ -11,7 +11,7 @@ function NavBar() {
                 <img
                   className="h-8 w-auto sm:h-10"
                   src="https://cdn.cp.adobe.io/content/2/dcx/dad2e7be-f877-402f-a228-f86341c235ee/rendition/preview.jpg/version/2/format/jpg/dimension/width/size/1200"
-                  alt=""
+                  alt="logo"
                 />
               </Link>
             </a>

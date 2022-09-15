@@ -22,7 +22,7 @@ function FavActivityEditForm() {
         .get(`${backendAPI}/activities/${id}`)
         .then((response) => setActivity(response.data))
         .catch((error) => navigate(`/404`));
-    }, [backendAPI]);
+    }, [id, navigate]);
 
 
  const deleteActivity = () => {
