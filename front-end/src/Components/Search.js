@@ -60,7 +60,7 @@ function Search() {
         <br />
         <div className="grid grid-cols-3 gap-3">
           {activities?.map((activity) => {
-            return <Activity id={activity.id} activity={activity} />;
+            return <Activity id={activity.id} activity={activity} />
           })}
         </div>{" "}
       </h2>
