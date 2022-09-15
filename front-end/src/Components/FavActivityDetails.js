@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 function FavActivityDetails() {
@@ -30,16 +30,34 @@ function FavActivityDetails() {
         deleteActivity();
       };
 
-  return (
-    <div>
-      <h2>Activity:{activity.name}</h2>
-      <h4>Accessibility: {activity.accessibility} </h4>
-      <h4>Type: {activity.type}</h4>
-      <h4>Participants: {activity.participants}</h4>
-      <h4>Price: {activity.price} </h4>
-    <button onClick={handleDelete}>Remove from favorites</button>
-    </div>
-  )
-}
+
+
+    return (
+        <div class="grid place-items-center h-screen">
+          <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white">
+            <div class="px-6 py-4">
+              <div class="font-bold text-xl mb-2">{activity.name}</div>
+              <div class="px-6 pt-4 pb-2">
+                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  Accessibility Rating (0.0 - 1.0): {activity.accessibility}
+                </span>
+                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  Type of Activity: {activity.type}
+                </span>
+                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  Participants: {activity.participants}
+                </span>
+                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  Price Rating (0.0 - 1.0): {activity.price}
+                </span>
+              </div>
+            </div>
+            <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" onClick={handleDelete}>Remove from favorites</button>
+            <Link to={`/activities`}><button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Back</button></Link>
+          </div>
+        </div>
+      );
+    }
+    
 
 export default FavActivityDetails

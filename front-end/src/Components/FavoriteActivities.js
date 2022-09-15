@@ -18,8 +18,8 @@ useEffect(() => {
 
 return (
     <div>
-        <h2>Activities</h2>
-        <section className='recipes-shown'>
+        <h2 class=" text-center font-medium leading-tight text-5xl mt-0 mb-2 text-gray-500 ">Favorite Activities</h2>
+        <section className="grid grid-cols-3 gap-3">
         {activities?.map(activity => {
             return <FavoriteActivity id={activity.id} activity={activity} />
         })}

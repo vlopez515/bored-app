@@ -11,11 +11,15 @@ import FavShow from "./Pages/FavShow";
 
 // COMPONENTS
 import NavBar from "./Components/NavBar";
-import { Container } from "./Components/styles/Container.styled";
+
 
 function App() {
   return (
-    <Container className="App">
+    <div className="App" style={{
+      color: 'rgb(153, 204, 255)',
+      width: 'auto',
+      height: 'auto'
+    }}>
       <Router>
         <NavBar />
         <main>
@@ -28,7 +32,7 @@ function App() {
           </Routes>
         </main>
       </Router>
-    </Container>
+    </div>
   );
 }
 

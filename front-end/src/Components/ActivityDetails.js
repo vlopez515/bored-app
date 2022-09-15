@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import Confetti from 'react-confetti'
-// import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from "react-confetti";
 
 function ActivityDetails() {
   const [activity, setActivity] = useState([]);
@@ -14,13 +13,11 @@ function ActivityDetails() {
     accessibility: "",
     is_favorite: false,
   });
-  const [confetti, setConfetti] = useState(false)
-
+  const [confetti, setConfetti] = useState(false);
 
   let { key } = useParams();
   const navigate = useNavigate();
   const API = process.env.REACT_APP_API_URL;
-  const backendAPI = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     axios
@@ -32,9 +29,10 @@ function ActivityDetails() {
   const addActivity = (newActivity) => {
     axios
       // .post(`${backendAPI}/activities`, newActivity)
-      .post('http://localhost:3003/activities/', newActivity)
+      .post("http://localhost:3003/activities/", newActivity)
       .then(
-        () => { console.log("success")
+        () => {
+          console.log("success");
         },
         (error) => console.error(error)
       )
@@ -54,23 +52,39 @@ function ActivityDetails() {
 
   const onClick = () => {
     addActivity(favorite);
-    setConfetti(true)
+    setConfetti(true);
   };
 
- 
-
   return (
-    <div className="Activity">
-      {confetti ? <Confetti /> : null}
-      <h2>{activity.activity}</h2>
-      <h4>Accessibility: {activity.accessibility} </h4>
-      <h4>Type: {activity.type}</h4>
-      <h4>Participants: {activity.participants}</h4>
-      <h4>Price: {activity.price} </h4>
-      <div>
-        <button onClick={onClick}>Add To Favorites</button>
+    <div class="grid place-items-center h-screen">
+      <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white">
+        {confetti ? <Confetti /> : null}
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">{activity.activity}</div>
+          <div class="px-6 pt-4 pb-2">
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+              Accessibility Rating (0.0 - 1.0): {activity.accessibility}
+            </span>
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+              Type of Activity: {activity.type}
+            </span>
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+              Participants: {activity.participants}
+            </span>
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+              Price Rating (0.0 - 1.0): {activity.price}
+            </span>
+          </div>
+        </div>
+        <button
+          class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+          onClick={onClick}
+        >
+          Add To Favorites
+        </button>
+        
+        <Link to={`/`}><button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Back</button></Link>
       </div>
-      <div></div>
     </div>
   );
 }

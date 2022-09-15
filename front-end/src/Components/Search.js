@@ -4,11 +4,11 @@ import Activity from "./Activity";
 
 function Search() {
   const [activities, setActivities] = useState([]);
-  const [buttonText, setButtonText] = useState('Click for activities')
-  
+  const [buttonText, setButtonText] = useState("Click for activities");
 
   const API = process.env.REACT_APP_API_URL;
 
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const reqOne = axios.get(`${API}`);
@@ -39,25 +39,31 @@ function Search() {
   };
 
   const onClick = () => {
-    setButtonText('More Activities')
-  }
-
+    setButtonText("More Activities");
+  };
 
   return (
     <div className="search">
-      <form className="form" onSubmit={handleSubmit}>
-        <button id="search-button" onClick={onClick}>{buttonText}</button>
-      </form>
-      
-        <h2>
-          {" "}
-          <div className="Activity">
-            {activities?.map((activity) => {
-              return <Activity id={activity.id} activity={activity} />;
-            })}
-          </div>{" "}
-        </h2>
-      
+      <div className="flex items-center justify-center">
+        <form className="form" onSubmit={handleSubmit}>
+          <button
+            className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            onClick={onClick}
+          >
+            {buttonText}
+          </button>
+        </form>
+      </div>
+      <h2>
+        {" "}
+        <br />
+        <br />
+        <div className="grid grid-cols-3 gap-3">
+          {activities?.map((activity) => {
+            return <Activity id={activity.id} activity={activity} />;
+          })}
+        </div>{" "}
+      </h2>
     </div>
   );
 }
